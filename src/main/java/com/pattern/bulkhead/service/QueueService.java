@@ -48,7 +48,7 @@ public class QueueService {
         try {
             connectionSemaphore.acquire();
             try (Connection connection = DriverManager.getConnection(DB_URL)) {
-                String selectSql = "SELECT * FROM messages LIMIT 1";
+                String selectSql = "SELECT * FROM messages";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
                     try (ResultSet resultSet = preparedStatement.executeQuery()) {
                         if (resultSet.next()) {
