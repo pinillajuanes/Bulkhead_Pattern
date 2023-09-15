@@ -24,4 +24,12 @@ public class QueueController {
     public String dequeue() throws InterruptedException {
         return queueService.dequeue();
     }
+
+    public QueueService getQueueService() {
+        return queueService;
+    }
+
+    public void setQueueService(QueueService queueService) {
+        this.queueService = queueService;
+    }
 }
