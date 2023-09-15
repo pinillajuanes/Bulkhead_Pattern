@@ -2,34 +2,28 @@ package com.pattern.bulkhead.controller;
 
 import com.pattern.bulkhead.service.QueueService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/queue")
-public class QueueController {
+public class QueueController{
 
     @Autowired
     private QueueService queueService;
 
     @PostMapping("/enqueue")
-    public String enqueue() throws InterruptedException {
-        queueService.enqueue("Message added to the queue");
-        return "Message added to the queue";
+    public String enqueue(@RequestBody String message) throws InterruptedException {
+        queueService.enqueue(message);
+        return "Message added to the queue: " + message;
     }
 
     @GetMapping("/dequeue")
     public String dequeue() throws InterruptedException {
-        return queueService.dequeue();
-    }
-
-    public QueueService getQueueService() {
-        return queueService;
-    }
-
-    public void setQueueService(QueueService queueService) {
-        this.queueService = queueService;
+        String message = queueService.dequeue();
+        if (message.equals("No messages in the queue")) {
+            return message;
+        } else {
+            return "Message dequeued from the queue: " + message;
+        }
     }
 }
