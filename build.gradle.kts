@@ -20,6 +20,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.xerial:sqlite-jdbc:3.42.0.0")
 }
 
 tasks.withType<Test> {
