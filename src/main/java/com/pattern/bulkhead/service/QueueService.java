@@ -15,7 +15,6 @@ public class QueueService {
     public QueueService() {
         initializeDatabase();
     }
-
     private void initializeDatabase() {
         try (Connection connection = DriverManager.getConnection(DB_URL)) {
             try (PreparedStatement createTableStatement = connection.prepareStatement(CREATE_TABLE_SQL)) {
